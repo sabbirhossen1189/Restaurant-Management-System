@@ -1,183 +1,154 @@
 <!-- Navbar -->
-<nav class="custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10"
-    style="z-index: 9999; background: #333;">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#home">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#about">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#gallary">Gallary</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#book-table">Book-Table</a>
-            </li>
-        </ul>
-        <a class="navbar-brand m-auto" href="{{ url('/') }}">
-            <img src="assets/imgs/logo.png" class="brand-img img-fluid" alt=""
-                style="max-width: 120px; height: auto; border-radius: 9%;">
-            <span class="brand-txt">The Velvet Spoon</span>
-        </a>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#blog">Food<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#contact">Contact Us</a>
-            </li>
-            @auth
-            <li class="nav-item">
-                <a href="{{ route('profile.show') }}" class="btn btn-primary ml-xl-4 ml-2 my-1 my-lg-0">Profile</a>
-            </li>
-            @endauth
-            @if (Route::has('login'))
-            @auth
-            <li class="nav-item">
+<nav x-data="{ open: false }" class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-20">
+            <!-- Logo -->
+            <div class="flex-shrink-0 flex items-center">
+                <a href="{{ url('/') }}" class="flex items-center gap-3">
+                    <div
+                        class="w-12 h-12 bg-red-600 text-white rounded-xl flex items-center justify-center font-bold text-2xl heading-font shadow-lg">
+                        VS</div>
+                    <span class="heading-font font-bold text-2xl text-slate-800">The Velvet Spoon</span>
+                </a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex md:items-center md:space-x-8">
+                <a href="#home" class="text-slate-600 hover:text-red-600 font-medium transition duration-200">Home</a>
+                <a href="#about" class="text-slate-600 hover:text-red-600 font-medium transition duration-200">About</a>
+                <a href="#gallary"
+                    class="text-slate-600 hover:text-red-600 font-medium transition duration-200">Gallery</a>
+                <a href="#book-table" class="text-slate-600 hover:text-red-600 font-medium transition duration-200">Book
+                    Table</a>
+                <a href="#blog" class="text-slate-600 hover:text-red-600 font-medium transition duration-200">Menu</a>
+                <a href="#contact"
+                    class="text-slate-600 hover:text-red-600 font-medium transition duration-200">Contact</a>
+
+                @auth
+                <a href="{{ route('profile.show') }}"
+                    class="text-slate-600 hover:text-red-600 font-medium transition duration-200">Profile</a>
+                @endauth
+            </div>
+
+            <!-- Auth/Cart Buttons -->
+            <div class="hidden md:flex items-center space-x-4">
+                @if (Route::has('login'))
+                @auth
                 <a href="{{ url('my_cart') }}"
-                    class="btn btn-primary ml-xl-3 ml-2 my-1 my-lg-0 position-relative cart-btn">
-                    <i class="ti-shopping-cart mr-1"></i>Cart
+                    class="relative text-slate-700 hover:text-red-600 transition duration-200">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    @php
+                    $cartCount = \App\Http\Controllers\HomeController::getCartCount();
+                    @endphp
                     @if($cartCount > 0)
-                    <span class="cart-badge">{{ $cartCount }}</span>
+                    <span
+                        class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">{{
+                        $cartCount }}</span>
                     @endif
                 </a>
-            </li>
-            <li class="nav-item">
-                <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                <form action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
-                    <button class="btn btn-primary ml-xl-3 ml-2 my-1 my-lg-0" type="submit">Logout</button>
+                    <button type="submit"
+                        class="bg-slate-800 hover:bg-slate-700 text-white px-5 py-2 rounded-full font-medium transition duration-300 shadow-md">Logout</button>
                 </form>
-            </li>
+                @else
+                <a href="{{ route('login') }}"
+                    class="text-slate-600 hover:text-red-600 font-medium transition duration-200">Login</a>
+                <a href="{{ route('register') }}"
+                    class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-full font-medium shadow-lg hover:shadow-xl transition duration-300">Register</a>
+                @endauth
+                @endif
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="flex items-center md:hidden">
+                <button @click="open = !open" type="button"
+                    class="text-slate-600 hover:text-red-600 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div x-show="open" @click.away="open = false"
+        class="md:hidden bg-white shadow-xl absolute w-full left-0 border-t border-gray-100" style="display: none;">
+        <div class="px-4 pt-2 pb-4 space-y-1">
+            <a href="#home"
+                class="block px-3 py-2 text-slate-700 font-medium hover:bg-red-50 hover:text-red-600 rounded-md">Home</a>
+            <a href="#about"
+                class="block px-3 py-2 text-slate-700 font-medium hover:bg-red-50 hover:text-red-600 rounded-md">About</a>
+            <a href="#gallary"
+                class="block px-3 py-2 text-slate-700 font-medium hover:bg-red-50 hover:text-red-600 rounded-md">Gallery</a>
+            <a href="#book-table"
+                class="block px-3 py-2 text-slate-700 font-medium hover:bg-red-50 hover:text-red-600 rounded-md">Book
+                Table</a>
+            <a href="#blog"
+                class="block px-3 py-2 text-slate-700 font-medium hover:bg-red-50 hover:text-red-600 rounded-md">Menu</a>
+            <a href="#contact"
+                class="block px-3 py-2 text-slate-700 font-medium hover:bg-red-50 hover:text-red-600 rounded-md">Contact</a>
+
+            @auth
+            <a href="{{ url('my_cart') }}"
+                class="block px-3 py-2 text-slate-700 font-medium hover:bg-red-50 hover:text-red-600 rounded-md">My Cart
+                ({{ \App\Http\Controllers\HomeController::getCartCount() }})</a>
+            <a href="{{ route('profile.show') }}"
+                class="block px-3 py-2 text-slate-700 font-medium hover:bg-red-50 hover:text-red-600 rounded-md">Profile</a>
+            <form action="{{ route('logout') }}" method="POST" class="w-full">
+                @csrf
+                <button type="submit"
+                    class="block w-full text-left px-3 py-2 text-slate-700 font-medium hover:bg-red-50 hover:text-red-600 rounded-md">Logout</button>
+            </form>
             @else
-            <li class="nav-item">
-                <a href="{{ route('login') }}" class="btn btn-primary ml-xl-5 ml-4 my-1 my-lg-0">Login</a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('register') }}" class="btn btn-primary ml-xl-4 my-1 my-lg-0">Register</a>
-            </li>
+            <a href="{{ route('login') }}"
+                class="block px-3 py-2 text-slate-700 font-medium hover:bg-red-50 hover:text-red-600 rounded-md">Login</a>
+            <a href="{{ route('register') }}"
+                class="block px-3 py-2 text-red-600 font-medium hover:bg-red-50 rounded-md">Register</a>
             @endauth
-            @endif
-        </ul>
+        </div>
     </div>
 </nav>
-<style>
-    .cart-btn {
-        position: relative;
-    }
 
-    .cart-badge {
-        position: absolute;
-        top: -8px;
-        right: -8px;
-        background: #dc3545;
-        color: white;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        font-size: 12px;
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        line-height: 1;
-        min-width: 20px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
+<!-- Hero Section -->
+<header id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-900">
+    <div class="absolute inset-0 opacity-40 mix-blend-multiply">
+        <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=2000&auto=format&fit=crop"
+            alt="Restaurant Interior" class="w-full h-full object-cover" />
+    </div>
 
-    /* Button hover effect for all navbar buttons */
-    .btn,
-    .navbar-actions .btn,
-    .d-flex .btn,
-    .mobile-nav-scroll .btn {
-        transition: background 0.2s, color 0.2s, transform 0.15s;
-    }
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span
+            class="inline-block py-1 px-3 rounded-full bg-red-600/20 text-red-400 font-semibold text-sm tracking-wider uppercase mb-4 border border-red-500/30 backdrop-blur-sm">Welcome
+            to our restaurant</span>
 
-    .btn:hover,
-    .navbar-actions .btn:hover,
-    .d-flex .btn:hover,
-    .mobile-nav-scroll .btn:hover,
-    .btn:focus,
-    .navbar-actions .btn:focus,
-    .d-flex .btn:focus,
-    .mobile-nav-scroll .btn:focus {
-        background: #ff214f !important;
-        color: #fff !important;
-        transform: scale(1.05);
-    }
+        <h1 class="heading-font text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg">
+            The Velvet Spoon
+        </h1>
 
-    .mobile-nav-scroll::-webkit-scrollbar {
-        display: none;
-    }
+        <p class="mt-4 text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light mb-10 drop-shadow-md">
+            Always Fresh & Delightful. Experience the finest culinary journey featuring exquisite flavors and remarkable
+            ambiance.
+        </p>
 
-    .mobile-nav-scroll {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#blog"
+                class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition duration-300 shadow-[0_0_20px_rgba(220,38,38,0.4)] hover:shadow-[0_0_25px_rgba(220,38,38,0.6)] transform hover:-translate-y-1">
+                Explore Menu
+            </a>
+            <a href="#book-table"
+                class="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg transition duration-300 transform hover:-translate-y-1">
+                Book a Table
+            </a>
+        </div>
+    </div>
 
-    @media (max-width: 991.98px) {
-        .navbar-brand .brand-img {
-            max-width: 90px !important;
-        }
-
-        .navbar-brand .brand-txt {
-            font-size: 1.1rem;
-        }
-
-        .navbar-collapse {
-            display: none !important;
-        }
-
-        .mobile-nav-scroll .nav-link {
-            font-size: 1rem;
-            color: #fff;
-            white-space: nowrap;
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.25rem;
-            transition: background 0.2s;
-        }
-
-        .mobile-nav-scroll .nav-link.active,
-        .mobile-nav-scroll .nav-link:focus,
-        .mobile-nav-scroll .nav-link:hover {
-            background: #ff214f;
-            color: #fff;
-        }
-
-        .mobile-nav-scroll {
-            margin-left: -8px;
-            margin-right: -8px;
-            padding-left: 8px;
-            padding-right: 8px;
-        }
-
-        .d-flex.flex-row>* {
-            flex-shrink: 0;
-        }
-    }
-
-    @media (min-width: 992px) {
-
-        .mobile-nav-scroll,
-        .d-lg-none {
-            display: none !important;
-        }
-
-        .navbar-collapse {
-            display: flex !important;
-        }
-    }
-</style>
-<!-- header -->
-<header id="home" class="header">
-    <div class="overlay text-white text-center">
-        <h1 class="display-2 font-weight-bold my-3">The Velvet Spoon</h1>
-        <h2 class="display-4 mb-5">Always fresh &amp; Delightful</h2>
-        <a class="btn btn-lg btn-primary" href="#gallary">View Our gallary</a>
+    <!-- Decorative bottom wave -->
+    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+        <svg class="relative block w-full h-12 md:h-24" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path
+                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118,130.85,133.56,203.4,129.21,241.67,126.92,280.4,116.14,321.39,56.44Z"
+                class="fill-slate-50"></path>
+        </svg>
     </div>
 </header>

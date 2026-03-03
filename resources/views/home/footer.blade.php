@@ -1,36 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website Title</title>
-    <!-- Add this to your <head> section -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- Other head elements like CSS links, JS links, etc. -->
-</head>
-<body>
-    <!-- Your website content -->
+<!-- Footer -->
+<footer class="bg-slate-900 border-t border-slate-800 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
 
-    <!-- page footer  -->
-    <div class="container-fluid bg-dark text-light has-height-md middle-items border-top text-center wow fadeIn">
-    
-        <div class="row mt-3">
-            <div class="col-12">
-                <h5>Follow Us</h5>
-                <br>
-                <a href="https://facebook.com" class="text-light mx-4" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
-                <a href="https://twitter.com" class="text-light mx-4" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
-                <a href="https://instagram.com" class="text-light mx-4" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
-                <a href="https://linkedin.com" class="text-light mx-4" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a>
-                <a href="https://youtube.com" class="text-light mx-4" target="_blank"><i class="fab fa-youtube fa-2x"></i></a>
+            <div class="lg:col-span-1">
+                <a href="{{ url('/') }}" class="flex items-center gap-3 mb-6">
+                    <div
+                        class="w-10 h-10 bg-red-600 text-white rounded-xl flex items-center justify-center font-bold text-xl heading-font">
+                        VS</div>
+                    <span class="heading-font font-bold text-2xl text-white">The Velvet Spoon</span>
+                </a>
+                <p class="text-slate-400 font-light mb-6">
+                    Delivering authentic flavors and remarkable dining experiences straight to your table.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-red-600 hover:text-white transition duration-300">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-red-600 hover:text-white transition duration-300">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-red-600 hover:text-white transition duration-300">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
             </div>
+
+            <div>
+                <h4 class="text-white font-bold text-lg mb-6">Quick Links</h4>
+                <ul class="space-y-3">
+                    <li><a href="#about" class="text-slate-400 hover:text-red-500 transition">About Us</a></li>
+                    <li><a href="#blog" class="text-slate-400 hover:text-red-500 transition">Our Menu</a></li>
+                    <li><a href="#gallary" class="text-slate-400 hover:text-red-500 transition">Gallery</a></li>
+                    <li><a href="#book-table" class="text-slate-400 hover:text-red-500 transition">Book A Table</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold text-lg mb-6">Opening Hours</h4>
+                <ul class="space-y-3 text-slate-400">
+                    <li class="flex justify-between"><span>Mon - Fri:</span> <span>09:00 AM - 10:00 PM</span></li>
+                    <li class="flex justify-between"><span>Saturday:</span> <span>10:00 AM - 11:00 PM</span></li>
+                    <li class="flex justify-between text-red-400"><span>Sunday:</span> <span>Closed</span></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold text-lg mb-6">Newsletter</h4>
+                <p class="text-slate-400 mb-4">Subscribe to get latest updates and offers.</p>
+                <form action="#" class="relative">
+                    <input type="email"
+                        class="w-full bg-slate-800 border border-slate-700 rounded-full py-3 px-4 text-white placeholder-slate-500 focus:outline-none focus:border-red-500"
+                        placeholder="Your Email">
+                    <button type="submit"
+                        class="absolute right-1 top-1 bottom-1 bg-red-600 text-white rounded-full px-4 hover:bg-red-700 transition">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <div
+            class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
+            <p>&copy;
+                <script>document.write(new Date().getFullYear())</script> The Velvet Spoon. All Rights Reserved.
+            </p>
+            <p class="mt-4 md:mt-0">Made with <i class="fas fa-heart text-red-600 mx-1"></i> by Moshiur</p>
         </div>
     </div>
-    <div class="bg-dark text-light text-center border-top wow fadeIn">
-        <p class="mb-0 py-3 text-muted small">&copy; Copyright <script>document.write(new Date().getFullYear())</script> Made with <i class="ti-heart text-danger"></i> By Team Artisan(1107,1139,1175)</p>
-    </div>
-    <!-- end of page footer -->
-
-    <!-- Other scripts -->
-</body>
-</html>
+</footer>

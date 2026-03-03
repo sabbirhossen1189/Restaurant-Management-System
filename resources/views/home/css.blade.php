@@ -1,13 +1,27 @@
 <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with FoodHut landing page.">
-    <meta name="author" content="Devcrud">
-    <title>The Velvet Spoon We Commit To WellFood</title>
-   
-    <!-- font icons -->
-    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>The Velvet Spoon</title>
+<!-- Google Fonts -->
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
+<!-- FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Tailwind -->
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
 
-    <link rel="stylesheet" href="assets/vendors/animate/animate.css">
+    .heading-font {
+        font-family: 'Playfair Display', serif;
+    }
 
-    <!-- Bootstrap + FoodHut main styles -->
-	<link rel="stylesheet" href="assets/css/foodhut.css">
+    .glass-nav {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+</style>
