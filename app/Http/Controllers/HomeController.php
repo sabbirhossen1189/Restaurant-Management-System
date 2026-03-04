@@ -176,23 +176,20 @@ class HomeController extends Controller
     {
         $data = new Book;
 
-        $data->name = $request->name;
-
-        $data->email = $request->email;
-
-        $data->phone = $request->phone;
-
-        $data->date = $request->date;
-
-        $data->time = $request->time;
-
+        $data->user_id = Auth::id();
+        $data->name = Auth::user()->name;
+        $data->email = Auth::user()->email;
+        $data->phone = $request->phone ?? Auth::user()->phone;
+        $data->guest = $request->people;
         $data->people = $request->people;
-
+        $data->date = $request->date;
+        $data->time = $request->time;
         $data->message = $request->message;
+        $data->status = 'pending';
 
         $data->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Table booked successfully! We will confirm your reservation shortly.');
     }
 
     // Helper method to get cart count for authenticated user

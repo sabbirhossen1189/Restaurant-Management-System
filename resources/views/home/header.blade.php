@@ -63,16 +63,13 @@
                             class="flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-red-50 hover:text-red-600 transition text-sm">
                             <i class="fas fa-user-circle w-4"></i> My Profile
                         </a>
-                        <a href="{{ route('my_orders') }}"
+                        <a href="{{ route('user.profile') }}?tab=orders"
                             class="flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-red-50 hover:text-red-600 transition text-sm">
                             <i class="fas fa-receipt w-4"></i> My Orders
                         </a>
-                        <a href="{{ url('my_cart') }}"
+                        <a href="{{ route('user.profile') }}?tab=reservations"
                             class="flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-red-50 hover:text-red-600 transition text-sm">
-                            <i class="fas fa-shopping-bag w-4"></i> My Cart
-                            @if($cartCount > 0)<span
-                                class="ml-auto bg-red-600 text-white text-xs px-2 py-0.5 rounded-full">{{ $cartCount
-                                }}</span>@endif
+                            <i class="fas fa-calendar-alt w-4"></i> My Reservations
                         </a>
                         <div class="border-t border-gray-100">
                             <form action="{{ route('logout') }}" method="POST">

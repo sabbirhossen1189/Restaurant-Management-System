@@ -15,9 +15,9 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $orders = $user->orders()->latest()->get();
-        $carts = $user->carts()->latest()->get();
+        $bookings = $user->bookings()->latest()->get();
 
-        return view('profile.show', compact('user', 'orders', 'carts'));
+        return view('profile.show', compact('user', 'orders', 'bookings'));
     }
 
     public function edit()
@@ -29,7 +29,7 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,

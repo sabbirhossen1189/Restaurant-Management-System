@@ -70,5 +70,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\Cart::class);
     }
-    
+
+    public function bookings()
+    {
+        return $this->hasMany(\App\Models\Book::class);
+    }
+
 }
