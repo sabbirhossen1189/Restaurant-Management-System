@@ -1,6 +1,10 @@
 <!-- Tailwind Top Header -->
-<header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6 z-10 sticky top-0 ml-64">
+<header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6 z-10 sticky top-0">
   <div class="flex items-center gap-4">
+    <!-- Mobile Menu Toggle -->
+    <button id="mobile-menu-toggle" class="lg:hidden text-slate-500 hover:text-slate-800 focus:outline-none">
+      <i class="fa fa-bars text-xl"></i>
+    </button>
     <!-- Optional Search Bar placeholder -->
     <h2 class="text-xl font-semibold text-slate-800 hidden sm:block">Admin Overview</h2>
   </div>

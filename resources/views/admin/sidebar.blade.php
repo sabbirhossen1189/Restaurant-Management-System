@@ -1,13 +1,22 @@
+<!-- Mobile Overlay -->
+<div id="sidebar-overlay"
+    class="fixed inset-0 bg-slate-900/50 z-20 hidden lg:hidden backdrop-blur-sm transition-opacity" aria-hidden="true">
+</div>
+
 <!-- Tailwind Sidebar -->
-<aside class="w-64 bg-slate-900 text-slate-300 min-h-screen fixed left-0 top-0 flex flex-col shadow-xl z-20">
+<aside id="admin-sidebar"
+    class="w-64 bg-slate-900 text-slate-300 min-h-screen fixed left-0 top-0 flex flex-col shadow-xl z-30 transition-transform duration-300 -translate-x-full lg:translate-x-0">
     <!-- Sidebar Header / Logo -->
-    <div class="h-16 flex items-center justify-center bg-slate-950 border-b border-slate-800">
+    <div class="h-16 flex items-center justify-between px-4 bg-slate-950 border-b border-slate-800">
         <a href="{{ url('/') }}" class="flex items-center gap-2">
             <div
                 class="w-8 h-8 flex items-center justify-center bg-red-600 font-bold text-white rounded-md heading-font">
                 VS</div>
             <span class="text-white font-semibold text-lg hover:text-red-500 transition">Velvet Spoon Admin</span>
         </a>
+        <button id="close-sidebar-btn" class="lg:hidden text-slate-400 hover:text-white focus:outline-none">
+            <i class="fa fa-times text-xl"></i>
+        </button>
     </div>
 
     <!-- Navigation Links -->
