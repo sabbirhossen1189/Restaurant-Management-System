@@ -1,20 +1,24 @@
 <!DOCTYPE html>
-<html>
-  <head> 
-    @include('admin.css')
-  </head>
-  <body>
-    
+<html lang="en">
+
+<head>
+  @include('admin.css')
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden flex">
+
+  @include('admin.sidebar')
+
+  <!-- Main Content Wrapper (offset by sidebar width) -->
+  <div class="flex-1 flex flex-col min-h-screen ml-64 transition-all duration-300">
     @include('admin.header')
-    @include('admin.sidebar')
-      <div class="page-content">
-        <div class="page-header">
-          <div class="container-fluid">
-           @include('admin.body')
-            </div>
-      </div>
-    </div>
-    <!-- JavaScript files-->
-   @include('admin.js')
-  </body>
+
+    <main class="flex-1 p-6 lg:p-8">
+      @include('admin.body')
+    </main>
+  </div>
+
+  @include('admin.js')
+</body>
+
 </html>

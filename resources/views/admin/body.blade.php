@@ -1,111 +1,125 @@
-<h2 class="h5 no-margin-bottom">Dashboard</h2>
-</div>
-</div>
-<section class="no-padding-top no-padding-bottom">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="statistic-block block">
-          <div class="progress-details d-flex align-items-end justify-content-between">
-            <div class="title">
-              <div class="icon"><i class="icon-user-1"></i></div><strong>All Users</strong>
-            </div>
-            <div class="number dashtext-1">{{ $total_user }}</div>
-          </div>
-          <div class="progress progress-template">
-            <div role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"
-              class="progress-bar progress-bar-template dashbg-1"></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="statistic-block block">
-          <div class="progress-details d-flex align-items-end justify-content-between">
-            <div class="title">
-              <div class="icon"><i class="icon-contract"></i></div><strong>All Foods</strong>
-            </div>
-            <div class="number dashtext-2">{{ $total_food }}</div>
-          </div>
-          <div class="progress progress-template">
-            <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-              class="progress-bar progress-bar-template dashbg-2"></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="statistic-block block">
-          <div class="progress-details d-flex align-items-end justify-content-between">
-            <div class="title">
-              <div class="icon"><i class="icon-paper-and-pencil"></i></div><strong>Total Orders</strong>
-            </div>
-            <div class="number dashtext-3">{{ $total_order }}</div>
-          </div>
-          <div class="progress progress-template">
-            <div role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"
-              class="progress-bar progress-bar-template dashbg-3"></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="statistic-block block">
-          <div class="progress-details d-flex align-items-end justify-content-between">
-            <div class="title">
-              <div class="icon"><i class="icon-writing-whiteboard"></i></div><strong>Total Delivered</strong>
-            </div>
-            <div class="number dashtext-4">{{ $total_deliverd }}</div>
-          </div>
-          <div class="progress progress-template">
-            <div role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"
-              class="progress-bar progress-bar-template dashbg-4"></div>
-          </div>
-        </div>
-      </div>
+<div class="space-y-6">
+  <!-- Header -->
+  <div class="flex items-center justify-between">
+    <h2 class="text-2xl font-bold text-slate-800 heading-font">Dashboard Overview</h2>
+  </div>
 
-      <!-- Total Revenue Block -->
-      <div class="col-md-12 col-sm-12 mb-4">
-        <div class="statistic-block block"
-          style="background: linear-gradient(135deg, #1d2127 0%, #2a3038 100%); border-left: 4px solid #28a745;">
-          <div class="progress-details d-flex align-items-end justify-content-between">
-            <div class="title">
-              <div class="icon"><i class="fa fa-dollar" style="color: #28a745; font-size: 24px;"></i></div><strong
-                style="font-size: 1.2rem;">Total Revenue</strong>
-            </div>
-            <div class="number" style="color: #28a745; font-size: 2rem; font-weight: bold;">${{
-              number_format($total_revenue, 2) }}</div>
-          </div>
+  <!-- Top Stats Row (4 columns) -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Users Card -->
+    <div
+      class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col relative overflow-hidden group hover:shadow-md transition">
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <p class="text-sm font-medium text-slate-500 mb-1">Total Users</p>
+          <h3 class="text-3xl font-bold text-slate-800">{{ $total_user }}</h3>
         </div>
+        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center text-xl">
+          <i class="fa fa-users"></i>
+        </div>
+      </div>
+      <div class="w-full bg-slate-100 h-1.5 rounded-full mt-auto">
+        <div class="bg-blue-500 h-1.5 rounded-full" style="width: 45%"></div>
       </div>
     </div>
 
-    <!-- Charts Section -->
-    <div class="row mt-4">
-      <!-- Orders By Status Pie Chart -->
-      <div class="col-lg-5 col-md-12 mb-4">
-        <div class="block">
-          <div class="title"><strong>Orders By Status</strong></div>
-          <canvas id="orderStatusChart"></canvas>
+    <!-- Foods Card -->
+    <div
+      class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col relative overflow-hidden group hover:shadow-md transition">
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <p class="text-sm font-medium text-slate-500 mb-1">Menu Items</p>
+          <h3 class="text-3xl font-bold text-slate-800">{{ $total_food }}</h3>
+        </div>
+        <div class="w-12 h-12 bg-amber-50 text-amber-500 rounded-lg flex items-center justify-center text-xl">
+          <i class="fa fa-utensils"></i>
         </div>
       </div>
+      <div class="w-full bg-slate-100 h-1.5 rounded-full mt-auto">
+        <div class="bg-amber-500 h-1.5 rounded-full" style="width: 70%"></div>
+      </div>
+    </div>
 
-      <!-- Popular Foods Bar Chart -->
-      <div class="col-lg-7 col-md-12 mb-4">
-        <div class="block">
-          <div class="title"><strong>Top 5 Popular Foods (Delivered)</strong></div>
-          <canvas id="popularFoodChart"></canvas>
+    <!-- Total Orders Card -->
+    <div
+      class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col relative overflow-hidden group hover:shadow-md transition">
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <p class="text-sm font-medium text-slate-500 mb-1">Total Orders</p>
+          <h3 class="text-3xl font-bold text-slate-800">{{ $total_order }}</h3>
         </div>
+        <div class="w-12 h-12 bg-indigo-50 text-indigo-500 rounded-lg flex items-center justify-center text-xl">
+          <i class="fa fa-shopping-bag"></i>
+        </div>
+      </div>
+      <div class="w-full bg-slate-100 h-1.5 rounded-full mt-auto">
+        <div class="bg-indigo-500 h-1.5 rounded-full" style="width: 60%"></div>
+      </div>
+    </div>
+
+    <!-- Delivered Orders Card -->
+    <div
+      class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col relative overflow-hidden group hover:shadow-md transition">
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <p class="text-sm font-medium text-slate-500 mb-1">Delivered</p>
+          <h3 class="text-3xl font-bold text-slate-800">{{ $total_deliverd }}</h3>
+        </div>
+        <div class="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-lg flex items-center justify-center text-xl">
+          <i class="fa fa-check-circle"></i>
+        </div>
+      </div>
+      <div class="w-full bg-slate-100 h-1.5 rounded-full mt-auto">
+        <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 35%"></div>
       </div>
     </div>
   </div>
-</section>
 
-<footer class="footer">
-  <div class="footer__block block no-margin-bottom">
-    <div class="container-fluid text-center">
-      <!-- Please do not remove the backlink to us unless you support us at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-      <p class="no-margin-bottom">2018 &copy; Your company. Download From <a target="_blank"
-          href="https://templateshub.net">Templates Hub</a>.</p>
+  <!-- Total Revenue Block (Full Width) -->
+  <div
+    class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-xl shadow-lg border border-slate-700 p-8 relative overflow-hidden">
+    <!-- Decorative subtle background circle -->
+    <div class="absolute -right-10 -top-10 w-40 h-40 bg-white opacity-5 rounded-full blur-2xl"></div>
+    <div class="relative z-10 flex items-center justify-between">
+      <div>
+        <div class="flex items-center gap-3 mb-2">
+          <div class="w-10 h-10 bg-emerald-500/20 text-emerald-400 rounded-lg flex items-center justify-center">
+            <i class="fa fa-dollar-sign text-xl"></i>
+          </div>
+          <h3 class="text-lg font-medium text-slate-300">Total Lifetime Revenue</h3>
+        </div>
+        <p class="text-5xl font-bold text-white tracking-tight">${{ number_format($total_revenue, 2) }}</p>
+      </div>
+      <div
+        class="hidden sm:block text-slate-400 text-sm bg-slate-800/50 px-4 py-2 rounded-full border border-slate-700">
+        From successfully delivered orders
+      </div>
     </div>
   </div>
+
+  <!-- Charts Section -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Orders By Status Pie Chart -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 lg:col-span-1">
+      <h3 class="text-lg font-bold text-slate-800 mb-4 pb-4 border-b border-slate-100">Orders By Status</h3>
+      <div class="relative h-64 w-full flex items-center justify-center">
+        <canvas id="orderStatusChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Popular Foods Bar Chart -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 lg:col-span-2">
+      <h3 class="text-lg font-bold text-slate-800 mb-4 pb-4 border-b border-slate-100">Top 5 Popular Foods (Delivered)
+      </h3>
+      <div class="relative h-64 w-full flex items-center justify-center">
+        <canvas id="popularFoodChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="mt-8 pt-8 border-t border-slate-200">
+  <p class="text-center text-sm text-slate-500">2026 &copy; The Velvet Spoon. Designed by Moshiur.</p>
 </footer>
 
 <!-- Chart.js Instantiation Scripts -->
@@ -115,8 +129,8 @@
     const rawOrderStatuses = @json($order_statuses);
     const rawPopularFoods = @json($popular_foods);
 
-    // Color palette corresponding to the dark theme
-    const themeColors = ['#e95f71', '#8b2de2', '#d9a927', '#28a745', '#17a2b8'];
+    // Color palette corresponding to Velvet Spoon theme
+    const themeColors = ['#e11d48', '#f59e0b', '#10b981', '#6366f1', '#8b5cf6'];
 
     // 1. Order Status Pie Chart
     if (Object.keys(rawOrderStatuses).length > 0) {
@@ -128,21 +142,28 @@
           datasets: [{
             data: Object.values(rawOrderStatuses),
             backgroundColor: themeColors,
-            borderWidth: 0
+            borderWidth: 2,
+            borderColor: '#ffffff',
+            hoverOffset: 4
           }]
         },
         options: {
           responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             legend: {
               position: 'bottom',
-              labels: { color: '#8a8d93' }
+              labels: {
+                padding: 20,
+                font: { family: "'Poppins', sans-serif" }
+              }
             }
-          }
+          },
+          cutout: '70%'
         }
       });
     } else {
-      document.getElementById('orderStatusChart').parentElement.innerHTML += "<p class='text-center mt-4 text-muted'>No orders yet</p>";
+      document.getElementById('orderStatusChart').parentElement.innerHTML = "<p class='text-slate-400 text-sm'>No orders recorded yet</p>";
     }
 
     // 2. Popular Foods Bar Chart
@@ -155,30 +176,39 @@
           datasets: [{
             label: 'Times Ordered',
             data: Object.values(rawPopularFoods),
-            backgroundColor: '#e95f71', // Velvet red theme
-            borderRadius: 4
+            backgroundColor: '#e11d48', // Tailwind rose-600
+            borderRadius: 6,
+            barPercentage: 0.6
           }]
         },
         options: {
           responsive: true,
+          maintainAspectRatio: false,
           scales: {
             y: {
               beginAtZero: true,
-              ticks: { color: '#8a8d93', stepSize: 1 },
-              grid: { color: '#333b47' }
+              ticks: {
+                stepSize: 1,
+                font: { family: "'Poppins', sans-serif" }
+              },
+              grid: {
+                color: '#f1f5f9',
+                drawBorder: false
+              },
+              border: { display: false }
             },
             x: {
-              ticks: { color: '#8a8d93' },
-              grid: { display: false }
+              ticks: { font: { family: "'Poppins', sans-serif" } },
+              grid: { display: false },
+              border: { display: false }
             }
           },
           plugins: {
             legend: { display: false }
           }
-        }
-      });
+        });
     } else {
-      document.getElementById('popularFoodChart').parentElement.innerHTML += "<p class='text-center mt-4 text-muted'>No delivered foods yet</p>";
+      document.getElementById('popularFoodChart').parentElement.innerHTML = "<p class='text-slate-400 text-sm'>No delivered foods to show</p>";
     }
   });
 </script>
