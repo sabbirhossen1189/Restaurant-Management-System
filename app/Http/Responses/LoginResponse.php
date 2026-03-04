@@ -21,6 +21,6 @@ class LoginResponse implements LoginResponseContract
             return redirect()->to('/admin/dashboard');
         }
 
-        return redirect()->to('/home');
+        return redirect()->to('/');
     }
 }
