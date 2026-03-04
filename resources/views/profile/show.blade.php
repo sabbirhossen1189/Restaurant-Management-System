@@ -120,7 +120,7 @@
         </ul>
 
         <div style="margin: 2rem 0;">
-            <a href="{{ route('profile.edit') }}" class="btn btn-primary">Edit Profile</a>
+            <a href="{{ route('user.profile.edit') }}" class="btn btn-primary">Edit Profile</a>
         </div>
 
         <div class="profile-section-title">Order History</div>

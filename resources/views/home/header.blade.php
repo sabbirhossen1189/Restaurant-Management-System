@@ -59,7 +59,7 @@
                             <p class="text-xs text-gray-400">Signed in as</p>
                             <p class="text-sm font-semibold text-slate-800 truncate">{{ Auth::user()->email }}</p>
                         </div>
-                        <a href="{{ route('profile.show') }}"
+                        <a href="{{ route('user.profile') }}"
                             class="flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-red-50 hover:text-red-600 transition text-sm">
                             <i class="fas fa-user-circle w-4"></i> My Profile
                         </a>
@@ -126,7 +126,7 @@
             <a href="{{ url('my_cart') }}"
                 class="block px-3 py-2 text-slate-700 font-medium hover:bg-red-50 hover:text-red-600 rounded-md">My Cart
                 ({{ \App\Http\Controllers\HomeController::getCartCount() }})</a>
-            <a href="{{ route('profile.show') }}"
+            <a href="{{ route('user.profile') }}"
                 class="block px-3 py-2 text-slate-700 font-medium hover:bg-red-50 hover:text-red-600 rounded-md">Profile</a>
             <form action="{{ route('logout') }}" method="POST" class="w-full">
                 @csrf
