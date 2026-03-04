@@ -236,7 +236,7 @@
                     <div>
                         <label class="form-label" for="name">Full Name</label>
                         <input id="name" class="form-input" type="text" name="name" value="{{ old('name') }}" required
-                            autofocus placeholder="যেমন: রহিম উদ্দিন">
+                            autofocus placeholder="e.g. Rahim Uddin">
                     </div>
                     <div>
                         <label class="form-label" for="phone">Phone Number</label>
@@ -254,19 +254,19 @@
                 <div style="margin-bottom:1.1rem;">
                     <label class="form-label" for="address">Address</label>
                     <input id="address" class="form-input" type="text" name="address" value="{{ old('address') }}"
-                        required placeholder="ধানমণ্ডি, ঢাকা-১২০৯">
+                        required placeholder="Dhanmondi, Dhaka-1209">
                 </div>
 
                 <div class="two-col" style="margin-bottom:1.5rem;">
                     <div>
                         <label class="form-label" for="password">Password</label>
                         <input id="password" class="form-input" type="password" name="password" required
-                            placeholder="কমপক্ষে ৮ অক্ষর" autocomplete="new-password">
+                            placeholder="Min 8 characters" autocomplete="new-password">
                     </div>
                     <div>
                         <label class="form-label" for="password_confirmation">Confirm Password</label>
                         <input id="password_confirmation" class="form-input" type="password"
-                            name="password_confirmation" required placeholder="পুনরায় পাসওয়ার্ড"
+                            name="password_confirmation" required placeholder="Repeat password"
                             autocomplete="new-password">
                     </div>
                 </div>
