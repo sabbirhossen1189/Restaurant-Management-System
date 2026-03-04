@@ -34,14 +34,12 @@
         </div>
     </div>
 
-    {{-- Seamless wave transition — two layers so no bleed-through at any wave height --}}
-    <div class="absolute bottom-0 left-0 w-full" style="line-height:0;">
-        {{-- Back layer: solid bg colour so dark never shows through at wave peaks --}}
-        <div class="absolute bottom-0 left-0 w-full bg-slate-50" style="height:60px;"></div>
-        {{-- Front layer: the actual wave shape --}}
-        <svg class="relative block w-full" style="height:60px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60"
-            preserveAspectRatio="none">
-            <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" class="fill-slate-900" />
+    {{-- Clean wave transition --}}
+    <div class="absolute bottom-0 left-0 w-full" style="line-height:0;overflow:hidden;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 80" preserveAspectRatio="none"
+            style="width:100%;height:80px;display:block;">
+            <path d="M0,80 L0,40 C180,80 360,10 540,35 C720,60 900,10 1080,30 C1260,50 1380,20 1440,40 L1440,80 Z"
+                fill="#f8fafc" />
         </svg>
     </div>
 </header>

@@ -22,6 +22,30 @@
         </div>
 
         <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-8">
+
+          {{-- Success message --}}
+          @if(session('message'))
+          <div class="mb-6 bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-lg">
+            <div class="flex items-center gap-2">
+              <i class="fa fa-check-circle text-emerald-500"></i>
+              <p class="text-sm text-emerald-700 font-medium">{{ session('message') }}</p>
+            </div>
+          </div>
+          @endif
+
+          {{-- Validation errors --}}
+          @if($errors->any())
+          <div class="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+            <div class="flex items-start gap-2">
+              <i class="fa fa-exclamation-circle text-red-500 mt-0.5"></i>
+              <ul class="text-sm text-red-700 space-y-1">
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          </div>
+          @endif
           <form action="{{ url('upload_food') }}" method="post" enctype="multipart/form-data" class="space-y-6">
             @csrf
 
