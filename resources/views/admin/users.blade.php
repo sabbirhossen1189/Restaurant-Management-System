@@ -102,6 +102,7 @@
                                     <td data-label="Registered At">{{ $user->created_at->format('M d, Y') }}</td>
                                     <td data-label="Actions">
                                         <a class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Are you sure you want to completely delete this user?');"
                                             href="{{ url('delete_user',$user->id) }}">Delete User</a>
                                     </td>
                                 </tr>
