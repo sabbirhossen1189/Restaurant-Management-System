@@ -29,21 +29,22 @@ class AdminController extends Controller
 
     function upload_food(Request $request)
     {
+        $request->validate([
+            'titile' => 'required|string|max:255',
+            'detail' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+        ]);
+
+        $image = $request->file('image');
+        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('food_img'), $filename);
+
         $data = new Food;
         $data->titile = $request->titile;
         $data->detail = $request->detail;
         $data->price = $request->price;
-
-        $image = $request->image;
-        $filename = time() . '.' . $image->getClientOriginalExtension();
-
-        // image upload
-        $request->image->move('food_img', $filename);
-
         $data->image = $filename;
-
-
-
         $data->save();
 
         return redirect()->back()->with('message', 'Food Added Successfully');
@@ -68,12 +69,29 @@ class AdminController extends Controller
     }
     function edit_food(Request $request, $id)
     {
+        $request->validate([
+            'titile' => 'required|string|max:255',
+            'detail' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+        ]);
+
         $data = Food::find($id);
         $data->titile = $request->titile;
         $data->detail = $request->detail;
         $data->price = $request->price;
 
-        $image = $request->image;
+        if ($request->hasFile('image')) {
+            // Delete old image file if it exists
+            $oldPath = public_path('food_img/' . $data->image);
+            if ($data->image && file_exists($oldPath)) {
+                unlink($oldPath);
+            }
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('food_img'), $filename);
+            $data->image = $filename;
+        }
 
         $data->save();
         return redirect()->back()->with('message', 'Food Updated Successfully');
