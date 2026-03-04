@@ -1,7 +1,7 @@
 @include('home.navbar')
 
 {{-- Hero Section --}}
-<header id="home" class="relative pt-32 pb-32 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-900">
+<header id="home" class="relative pt-32 pb-12 lg:pt-48 lg:pb-16 overflow-hidden bg-slate-900">
     <div class="absolute inset-0 opacity-40 mix-blend-multiply">
         <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=2000&auto=format&fit=crop"
             alt="Restaurant Interior" class="w-full h-full object-cover" />
@@ -34,13 +34,14 @@
         </div>
     </div>
 
-    {{-- Decorative bottom wave --}}
-    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-        <svg class="relative block w-full h-12 md:h-24" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path
-                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118,130.85,133.56,203.4,129.21,241.67,126.92,280.4,116.14,321.39,56.44Z"
-                class="fill-slate-50"></path>
+    {{-- Seamless wave transition — two layers so no bleed-through at any wave height --}}
+    <div class="absolute bottom-0 left-0 w-full" style="line-height:0;">
+        {{-- Back layer: solid bg colour so dark never shows through at wave peaks --}}
+        <div class="absolute bottom-0 left-0 w-full bg-slate-50" style="height:60px;"></div>
+        {{-- Front layer: the actual wave shape --}}
+        <svg class="relative block w-full" style="height:60px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60"
+            preserveAspectRatio="none">
+            <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" class="fill-slate-900" />
         </svg>
     </div>
 </header>

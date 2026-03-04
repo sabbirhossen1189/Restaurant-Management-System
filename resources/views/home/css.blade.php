@@ -23,5 +23,41 @@
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .scrolled-nav {
+        background: rgba(255, 255, 255, 0.97) !important;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Scroll-reveal animations */
+    .section-reveal {
+        opacity: 0;
+        transform: translateY(36px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .section-reveal.revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .section-reveal-left {
+        opacity: 0;
+        transform: translateX(-36px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .section-reveal-right {
+        opacity: 0;
+        transform: translateX(36px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .section-reveal-left.revealed,
+    .section-reveal-right.revealed {
+        opacity: 1;
+        transform: translateX(0);
     }
 </style>

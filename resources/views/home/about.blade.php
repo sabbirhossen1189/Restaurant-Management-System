@@ -1,9 +1,9 @@
 <!--  About Section  -->
-<section id="about" class="py-20 bg-slate-50">
+<section id="about" class="pt-12 pb-20 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col lg:flex-row items-center gap-12">
 
-            <div class="w-full lg:w-1/2 rounded-2xl overflow-hidden shadow-2xl relative">
+            <div class="w-full lg:w-1/2 rounded-2xl overflow-hidden shadow-2xl relative section-reveal-left">
                 <!-- Decorative elements -->
                 <div
                     class="absolute -top-4 -left-4 w-24 h-24 bg-red-100 rounded-full mix-blend-multiply filter blur-xl opacity-70">
