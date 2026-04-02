@@ -16,7 +16,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        if (auth::id())
+        if (Auth::id())
         {
             $usertype = Auth::user()->usertype;
 
@@ -90,6 +90,7 @@ class HomeController extends Controller
             $order->quantity = $cart->quantity;
             $order->price = $cart->price;
             $order->food_image = $cart->image;
+            $order->user_id = $userid;
             $order->delivery_status = 'in progress';
             $order->save();
             $cart_id = $cart->id;
@@ -111,7 +112,11 @@ class HomeController extends Controller
 
             $cart_detail = $food->detail;
 
-            $cart_price = Str::remove('Taka',$food->price);
+            $cart_price = floatval(preg_replace('/[^\d\.]/', '', $food->price));
+            $cart_qty = intval($request->qty);
+            if ($cart_qty < 1) {
+                $cart_qty = 1;
+            }
 
             $cart_image = $food->image;
 
@@ -121,11 +126,11 @@ class HomeController extends Controller
 
             $data->detail = $cart_detail;
 
-            $data->price = $cart_price * $request->qty;
+            $data->price = $cart_price * $cart_qty;
 
             $data->image = $cart_image;
 
-            $data->quantity = $request->qty;
+            $data->quantity = $cart_qty;
 
             $data->user_id = Auth()->user()->id;
 

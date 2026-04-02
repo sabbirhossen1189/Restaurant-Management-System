@@ -116,7 +116,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('profile.update') }}">
+        <form method="POST" action="{{ route('user.profile.update') }}">
             @csrf
             
             <div class="form-group">
@@ -153,7 +153,7 @@
 
             <div style="margin-top: 2rem;">
                 <button type="submit" class="btn btn-primary">Update Profile</button>
-                <a href="{{ route('profile.show') }}" class="btn btn-secondary">Cancel</a>
+                <a href="{{ route('user.profile.show') }}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>

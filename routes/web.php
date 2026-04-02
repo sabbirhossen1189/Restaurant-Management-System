@@ -33,13 +33,16 @@ Route::post('/edit_food/{id}',[AdminController::class,'edit_food'])->name('edit_
 
 Route::get('/home', [HomeController::class,'index'])->name('home');   
 
-Route::post('/add_cart/{id}', [HomeController::class,'add_cart'])->name('add_cart');
+Route::middleware(['auth'])->group(function () {
+    Route::post('/add_cart/{id}', [HomeController::class,'add_cart'])->name('add_cart');
+    Route::get('/my_cart', [HomeController::class,'my_cart'])->name('my_cart');
+    Route::get('/remove_cart/{id}', [HomeController::class,'remove_cart'])->name('remove_cart');
+    Route::post('/confirm_order', [HomeController::class,'confirm_order'])->name('confirm_order');
 
-Route::get('/my_cart', [HomeController::class,'my_cart'])->name('my_cart');
-
-Route::get('/remove_cart/{id}', [HomeController::class,'remove_cart'])->name('remove_cart');
-
-Route::post('/confirm_order', [HomeController::class,'confirm_order'])->name('confirm_order');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('user.profile.show');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('user.profile.edit');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('user.profile.update');
+});
 
 Route::get('/orders', [AdminController::class,'orders'])->name('orders');
 
@@ -54,12 +57,6 @@ Route::post('/book_table', [HomeController::class,'book_table'])->name('book_tab
 Route::get('/reservations', [AdminController::class,'reservations'])->name('reservations');
 
 Route::get('/home', [HomeController::class,'index'])->name('home');
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
-    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-});
 
 Route::middleware([
     'auth:sanctum',

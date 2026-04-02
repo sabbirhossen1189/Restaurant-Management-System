@@ -31,7 +31,7 @@
             </li>
             @auth
             <li class="nav-item">
-             <a href="{{ route('profile.show') }}" class="btn btn-primary ml-xl-4 ml-2 my-1 my-lg-0">Profile</a>
+             <a href="{{ route('user.profile.show') }}" class="btn btn-primary ml-xl-4 ml-2 my-1 my-lg-0">Profile</a>
             </li>
             @endauth
              @if (Route::has('login'))

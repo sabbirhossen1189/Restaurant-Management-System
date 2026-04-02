@@ -9,7 +9,7 @@
                             <img src="food_img/{{$data->image}}" alt="photoLoading" class="rounded-0 card-img img-fluid">
                             <div class="card-body">
                                 <h1 class="text-center mb-4"><a href="#" class="badge badge-primary">{{ $data->price }}</a></h1>
-                                <h4 class="pt20 pb20">{{ $data->title }}</h4>
+                                <h4 class="pt20 pb20">{{ $data->titile }}</h4>
                                 <p class="text-white">{{ $data->detail }}</p>
                             </div>
                             <form action="{{url('add_cart', $data->id)}}" method="post">

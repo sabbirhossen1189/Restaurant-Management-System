@@ -13,6 +13,7 @@ class Order extends Model
         'email',
         'address',
         'phone',
+        'user_id',
         'titile',
         'quantity',
         'price',
