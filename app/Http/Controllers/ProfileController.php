@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Book;
 use App\Models\Order;
 use App\Models\Cart;
 use Illuminate\Http\Request;
@@ -16,8 +17,9 @@ class ProfileController extends Controller
         $user = Auth::user();
         $orders = $user->orders()->latest()->get();
         $carts = $user->carts()->latest()->get();
+        $bookings = $user->bookings()->latest()->get();
 
-        return view('profile.show', compact('user', 'orders', 'carts'));
+        return view('profile.show', compact('user', 'orders', 'carts', 'bookings'));
     }
 
     public function edit()
@@ -50,7 +52,7 @@ class ProfileController extends Controller
             'address' => $request->address,
         ]);
 
-        return redirect()->route('profile.show')
+        return redirect()->route('user.profile.show')
             ->with('success', 'Profile updated successfully!');
     }
 }

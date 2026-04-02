@@ -150,25 +150,65 @@ class HomeController extends Controller
 
     public function book_table(Request $request)
     {
-        $data = new Book;
+        if (!Auth::check()) {
+            return redirect('login');
+        }
 
-        $data->name = $request->name;
+        $request->validate([
+            'phone' => 'required|string|max:255',
+            'guest' => 'required|string|max:255',
+            'date' => 'required|date',
+            'time' => 'required',
+        ]);
 
-        $data->email = $request->email;
+        Book::create([
+            'phone' => $request->phone,
+            'guest' => $request->guest,
+            'date' => $request->date,
+            'time' => $request->time,
+            'user_id' => Auth::id(),
+        ]);
 
-        $data->phone = $request->phone;
+        return redirect()->back()->with('message', 'Table booked successfully.');
+    }
 
-        $data->date = $request->date;
+    public function cancel_order($id)
+    {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
 
-        $data->time = $request->time;
+        $order = Order::find($id);
 
-        $data->people = $request->people;
+        if (!$order || $order->user_id !== Auth::id()) {
+            return redirect()->back()->with('message', 'Order not found or access denied.');
+        }
 
-        $data->message = $request->message;
+        if ($order->delivery_status === 'delivered') {
+            return redirect()->back()->with('message', 'Delivered orders cannot be cancelled.');
+        }
 
-        $data->save();
+        $order->delivery_status = 'canceled';
+        $order->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Order cancelled successfully.');
+    }
+
+    public function cancel_booking($id)
+    {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
+
+        $booking = Book::find($id);
+
+        if (!$booking || $booking->user_id !== Auth::id()) {
+            return redirect()->back()->with('message', 'Booking not found or access denied.');
+        }
+
+        $booking->delete();
+
+        return redirect()->back()->with('message', 'Booking cancelled successfully.');
     }
 
     // Helper method to get cart count for authenticated user

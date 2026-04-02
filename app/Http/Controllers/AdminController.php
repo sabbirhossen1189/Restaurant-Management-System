@@ -103,14 +103,26 @@ class AdminController extends Controller
     function canceled($id)
     {
         $data = Order::find($id);
-        $data->delivery_status = 'canceled';
-        $data->save();
-        return redirect()->back()->with('message', 'Food Order Canceled');
+        if ($data) {
+            $data->delete();
+            return redirect()->back()->with('message', 'Order canceled and removed from list');
+        }
+        return redirect()->back()->with('message', 'Order not found');
     }
 
     public function reservations()
     {
         $data = Book::all();
         return view('admin.reservations', compact('data'));
+    }
+
+    public function cancel_reservation($id)
+    {
+        $data = Book::find($id);
+        if ($data) {
+            $data->delete();
+            return redirect()->back()->with('message', 'Reservation canceled successfully');
+        }
+        return redirect()->back()->with('message', 'Reservation not found');
     }
 }

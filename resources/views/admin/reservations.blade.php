@@ -24,6 +24,7 @@
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +35,9 @@
                                 <td>{{ $data->date }}</td>
                                 <td>{{ $data->time }}</td>
                                 <td><span class="badge badge-success">Confirmed</span></td>
+                                <td>
+                                    <a class="btn btn-danger btn-sm" href="{{ url('cancel_reservation', $data->id) }}">Cancel</a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -38,6 +38,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/my_cart', [HomeController::class,'my_cart'])->name('my_cart');
     Route::get('/remove_cart/{id}', [HomeController::class,'remove_cart'])->name('remove_cart');
     Route::post('/confirm_order', [HomeController::class,'confirm_order'])->name('confirm_order');
+    Route::post('/book_table', [HomeController::class,'book_table'])->name('book_table');
+    Route::get('/cancel_order/{id}', [HomeController::class,'cancel_order'])->name('cancel_order');
+    Route::get('/cancel_booking/{id}', [HomeController::class,'cancel_booking'])->name('cancel_booking');
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('user.profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('user.profile.edit');
@@ -52,9 +55,8 @@ Route::get('/delivered/{id}', [AdminController::class,'delivered'])->name('deliv
 
 Route::get('/canceled/{id}', [AdminController::class,'canceled'])->name('canceled');
 
-Route::post('/book_table', [HomeController::class,'book_table'])->name('book_table');
-
 Route::get('/reservations', [AdminController::class,'reservations'])->name('reservations');
+Route::get('/cancel_reservation/{id}', [AdminController::class,'cancel_reservation'])->name('cancel_reservation');
 
 Route::get('/home', [HomeController::class,'index'])->name('home');
 

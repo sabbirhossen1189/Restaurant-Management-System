@@ -128,8 +128,16 @@
             <ul class="profile-list">
                 @foreach($orders as $order)
                     <li>
-                        <strong>Order #{{ $order->id }}</strong>
-                        <span class="profile-badge">{{ $order->created_at->format('Y-m-d') }}</span>
+                        <div>
+                            <strong>Order #{{ $order->id }}</strong><br>
+                            <span class="text-muted">{{ $order->created_at->format('Y-m-d') }}</span>
+                        </div>
+                        <div>
+                            <span class="profile-badge">{{ $order->delivery_status }}</span>
+                            @if($order->delivery_status !== 'delivered' && $order->delivery_status !== 'canceled')
+                                <a href="{{ url('cancel_order', $order->id) }}" class="btn btn-danger" style="margin-left: 0.5rem;">Cancel</a>
+                            @endif
+                        </div>
                     </li>
                 @endforeach
             </ul>
@@ -150,6 +158,28 @@
             </ul>
         @else
             <p class="text-muted">No cart history found.</p>
+        @endif
+
+        <div class="profile-section-title">Booking History</div>
+        <p class="text-muted">Your booked tables are shown below. Log in to view all your reservations.</p>
+        @if($bookings->count())
+            <ul class="profile-list">
+                @foreach($bookings as $booking)
+                    <li>
+                        <div>
+                            <strong>Booking #{{ $booking->id }}</strong><br>
+                            <span class="text-muted">Date: {{ $booking->date }} | Time: {{ $booking->time }}</span>
+                        </div>
+                        <div>
+                            <span class="profile-badge">Guests: {{ $booking->guest }}</span>
+                            <span class="profile-badge">Phone: {{ $booking->phone }}</span>
+                            <a href="{{ url('cancel_booking', $booking->id) }}" class="btn btn-danger" style="margin-left: 0.5rem;">Cancel</a>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+        @else
+            <p class="text-muted">No table bookings found.</p>
         @endif
     </div>
 </div>
