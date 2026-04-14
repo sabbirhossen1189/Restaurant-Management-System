@@ -10,7 +10,11 @@
       <div class="page-content">
         <div class="page-header">
           <div class="container-fluid">
-           @include('admin.body')
+           @hasSection('body')
+             @yield('body')
+           @else
+             @include('admin.body')
+           @endif
             </div>
       </div>
     </div>

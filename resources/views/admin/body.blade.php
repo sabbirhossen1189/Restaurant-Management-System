@@ -5,6 +5,7 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-3 col-sm-6">
+                <a href="{{ route('users') }}" style="text-decoration: none; color: inherit;">
                 <div class="statistic-block block">
                   <div class="progress-details d-flex align-items-end justify-content-between">
                     <div class="title">
@@ -16,8 +17,10 @@
                     <div role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-1"></div>
                   </div>
                 </div>
+                </a>
               </div>
               <div class="col-md-3 col-sm-6">
+                <a href="{{ route('view_food') }}" style="text-decoration: none; color: inherit;">
                 <div class="statistic-block block">
                   <div class="progress-details d-flex align-items-end justify-content-between">
                     <div class="title">
@@ -29,8 +32,10 @@
                     <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-2"></div>
                   </div>
                 </div>
+                </a>
               </div>
               <div class="col-md-3 col-sm-6">
+                <a href="{{ route('orders') }}" style="text-decoration: none; color: inherit;">
                 <div class="statistic-block block">
                   <div class="progress-details d-flex align-items-end justify-content-between">
                     <div class="title">
@@ -42,12 +47,14 @@
                     <div role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-3"></div>
                   </div>
                 </div>
+                </a>
               </div>
               <div class="col-md-3 col-sm-6">
+                <a href="{{ route('delivered_orders') }}" style="text-decoration: none; color: inherit;">
                 <div class="statistic-block block">
                   <div class="progress-details d-flex align-items-end justify-content-between">
                     <div class="title">
-                      <div class="icon"><i class="icon-writing-whiteboard"></i></div><strong>Total Deliverd</strong>
+                      <div class="icon"><i class="icon-writing-whiteboard"></i></div><strong>Total Delivered</strong>
                     </div>
                     <div class="number dashtext-4">{{ $total_deliverd }}</div>
                   </div>
@@ -55,6 +62,7 @@
                     <div role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-4"></div>
                   </div>
                 </div>
+                </a>
               </div>
             </div>
           </div>

@@ -2,185 +2,419 @@
 
 @section('content')
 <style>
-    .profile-hero {
-        background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('/public/assets/imgs/about-section.jpg') center/cover no-repeat;
+    * {
+        box-sizing: border-box;
+    }
+    
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         min-height: 100vh;
+        padding: 2rem 0;
+    }
+
+    .profile-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    .profile-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        padding: 3rem 2rem;
+        color: white;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .profile-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        transform: translate(50%, -50%);
+    }
+
+    .profile-header-content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
+        font-size: 3rem;
+        border: 3px solid rgba(255, 255, 255, 0.5);
+        flex-shrink: 0;
     }
-    .profile-card {
-        background: rgba(30,30,30,0.97);
-        border-radius: 2rem;
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        padding: 3rem 2.5rem;
-        max-width: 520px;
-        width: 100%;
-        text-align: center;
-        color: #fff;
-        font-family: 'Segoe UI', 'Arial', sans-serif;
-    }
-    .profile-title {
-        font-size: 2.7rem;
-        font-weight: bold;
-        color: #ff3366;
-        margin-bottom: 1.2rem;
-        letter-spacing: 2px;
-        text-shadow: 1px 2px 8px #00000055;
-    }
-    .profile-section-title {
-        font-size: 1.5rem;
+
+    .profile-header-text h1 {
+        font-size: 2rem;
+        margin: 0 0 0.5rem 0;
         font-weight: 700;
-        color: #ffd700;
-        margin-top: 2.2rem;
-        margin-bottom: 1.1rem;
-        letter-spacing: 1px;
-        text-shadow: 1px 2px 8px #00000033;
     }
-    .profile-list {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 1.5rem 0;
+
+    .profile-header-text p {
+        margin: 0.3rem 0;
+        opacity: 0.9;
+        font-size: 1rem;
     }
-    .profile-list li {
-        font-size: 1.15rem;
-        margin-bottom: 0.7rem;
-        color: #fff;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: transparent;
-        border-bottom: 1px solid #ff336633;
-        padding-bottom: 0.3rem;
+
+    .profile-actions {
+        margin-top: 2rem;
     }
-    .profile-list li strong {
-        color: #ffb347;
-        font-weight: 600;
-    }
-    .profile-badge {
-        display: inline-block;
-        background: linear-gradient(90deg, #ff3366 0%, #ffb347 100%);
-        color: #fff;
-        border-radius: 20px;
-        padding: 0.3rem 1.1rem;
-        font-size: 1.05rem;
-        margin-left: 0.5rem;
-        font-weight: 500;
-        box-shadow: 0 2px 8px #ff336633;
-    }
-    .text-muted {
-        color: #ffd6e0 !important;
-        font-size: 1.05rem;
-    }
+
     .btn {
         display: inline-block;
-        padding: 0.8rem 2rem;
+        padding: 0.7rem 1.8rem;
         border: none;
-        border-radius: 25px;
-        font-size: 1.1rem;
+        border-radius: 12px;
+        font-size: 1rem;
         font-weight: 600;
         text-decoration: none;
         cursor: pointer;
         transition: all 0.3s ease;
-        margin: 0.5rem;
+        margin-right: 1rem;
+        margin-bottom: 0.5rem;
     }
+
     .btn-primary {
-        background: linear-gradient(90deg, #ff3366 0%, #ffb347 100%);
-        color: #fff;
-        box-shadow: 0 4px 15px #ff336633;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
     }
+
     .btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px #ff336644;
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
     }
-    .success-message {
-        background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
-        color: #fff;
-        padding: 1rem;
-        border-radius: 15px;
+
+    .btn-secondary {
+        background: white;
+        color: #667eea;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border: 2px solid #667eea;
+    }
+
+    .btn-secondary:hover {
+        background: #f8f9fa;
+        transform: translateY(-2px);
+    }
+
+    .btn-danger {
+        background: #ff6b6b;
+        color: white;
+        font-size: 0.9rem;
+        padding: 0.5rem 1.2rem;
+    }
+
+    .btn-danger:hover {
+        background: #ff5252;
+        transform: translateY(-1px);
+    }
+
+    .profile-content {
+        background: white;
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2d3748;
         margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 3px solid #667eea;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .section-title::before {
+        content: '';
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        background: #667eea;
+        border-radius: 50%;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .info-item {
+        background: linear-gradient(135deg, #f5f7fa 0%, #f0f1f4 100%);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border-left: 4px solid #667eea;
+    }
+
+    .info-label {
+        font-size: 0.85rem;
+        color: #718096;
         font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.5rem;
+    }
+
+    .info-value {
+        font-size: 1.1rem;
+        color: #2d3748;
+        font-weight: 600;
+        word-break: break-word;
+    }
+
+    .history-item {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+        border-left: 4px solid #764ba2;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+
+    .history-item:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+    }
+
+    .history-info {
+        flex: 1;
+    }
+
+    .history-title {
+        font-weight: 700;
+        color: #2d3748;
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .history-date {
+        color: #718096;
+        font-size: 0.9rem;
+    }
+
+    .status-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin: 0 0.5rem;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 2rem;
+        color: #718096;
+    }
+
+    .empty-state-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+
+    .success-message {
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        font-weight: 600;
+        box-shadow: 0 5px 15px rgba(72, 187, 120, 0.3);
+    }
+
+    .actions-row {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .profile-header {
+            padding: 2rem 1.5rem;
+        }
+
+        .profile-header-content {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .profile-content {
+            padding: 1.5rem;
+        }
+
+        .info-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .history-item {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .profile-header-text h1 {
+            font-size: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+        }
+
+        .actions-row {
+            flex-direction: column;
+        }
+
+        .btn {
+            width: 100%;
+            margin-right: 0;
+        }
     }
 </style>
-<div class="profile-hero">
-    <div class="profile-card">
-        <div class="profile-title">User Profile</div>
-        
-        @if(session('success'))
-            <div class="success-message">
-                {{ session('success') }}
+
+<div class="profile-container">
+    @if(session('success'))
+        <div class="success-message">
+            ✓ {{ session('success') }}
+        </div>
+    @endif
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="profile-header-content">
+            <div class="profile-avatar">👤</div>
+            <div class="profile-header-text">
+                <h1>{{ $user->name }}</h1>
+                <p>📧 {{ $user->email }}</p>
+                <p>📱 {{ $user->phone ?? 'No phone added' }}</p>
+            </div>
+        </div>
+        <div class="profile-actions">
+            <a href="{{ route('user.profile.edit') }}" class="btn btn-primary">✏️ Edit Profile</a>
+        </div>
+    </div>
+
+    <!-- Profile Information -->
+    <div class="profile-content">
+        <div class="section-title">📋 Personal Information</div>
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">Full Name</div>
+                <div class="info-value">{{ $user->name }}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Email Address</div>
+                <div class="info-value">{{ $user->email }}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Phone Number</div>
+                <div class="info-value">{{ $user->phone ?? 'Not provided' }}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Address</div>
+                <div class="info-value">{{ $user->address ?? 'Not provided' }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order History -->
+    <div class="profile-content">
+        <div class="section-title">🛒 Order History</div>
+        @if($orders->count())
+            @foreach($orders as $order)
+                <div class="history-item">
+                    <div class="history-info">
+                        <div class="history-title">Order #{{ $order->id }}</div>
+                        <div class="history-date">📅 {{ $order->created_at->format('F j, Y') }}</div>
+                    </div>
+                    <div>
+                        <span class="status-badge">{{ ucfirst($order->delivery_status) }}</span>
+                        @if($order->delivery_status !== 'delivered' && $order->delivery_status !== 'canceled')
+                            <a href="{{ url('cancel_order', $order->id) }}" class="btn btn-danger">Cancel</a>
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+        @else
+            <div class="empty-state">
+                <div class="empty-state-icon">🛍️</div>
+                <p>No orders yet. Start ordering from our delicious menu!</p>
             </div>
         @endif
+    </div>
 
-        <ul class="profile-list">
-            <li><strong>Name:</strong> <span class="profile-badge">{{ $user->name }}</span></li>
-            <li><strong>Email:</strong> <span class="profile-badge">{{ $user->email }}</span></li>
-            <li><strong>Phone:</strong> <span class="profile-badge">{{ $user->phone }}</span></li>
-            <li><strong>Address:</strong> <span class="profile-badge">{{ $user->address }}</span></li>
-        </ul>
-
-        <div style="margin: 2rem 0;">
-            <a href="{{ route('user.profile.edit') }}" class="btn btn-primary">Edit Profile</a>
-        </div>
-
-        <div class="profile-section-title">Order History</div>
-        @if($orders->count())
-            <ul class="profile-list">
-                @foreach($orders as $order)
-                    <li>
-                        <div>
-                            <strong>Order #{{ $order->id }}</strong><br>
-                            <span class="text-muted">{{ $order->created_at->format('Y-m-d') }}</span>
-                        </div>
-                        <div>
-                            <span class="profile-badge">{{ $order->delivery_status }}</span>
-                            @if($order->delivery_status !== 'delivered' && $order->delivery_status !== 'canceled')
-                                <a href="{{ url('cancel_order', $order->id) }}" class="btn btn-danger" style="margin-left: 0.5rem;">Cancel</a>
-                            @endif
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
-        @else
-            <p class="text-muted">No orders found.</p>
-        @endif
-
-        <div class="profile-section-title">Cart History</div>
+    <!-- Cart History -->
+    <div class="profile-content">
+        <div class="section-title">🛒 Cart History</div>
         @if($carts->count())
-            <ul class="profile-list">
-                @foreach($carts as $cart)
-                    <li>
-                        <strong>Cart #{{ $cart->id }}</strong>
-                        <span class="profile-badge">{{ $cart->created_at->format('Y-m-d') }}</span>
-                    </li>
-                    
-                @endforeach
-            </ul>
+            @foreach($carts as $cart)
+                <div class="history-item">
+                    <div class="history-info">
+                        <div class="history-title">Cart #{{ $cart->id }}</div>
+                        <div class="history-date">📅 {{ $cart->created_at->format('F j, Y') }}</div>
+                    </div>
+                </div>
+            @endforeach
         @else
-            <p class="text-muted">No cart history found.</p>
+            <div class="empty-state">
+                <div class="empty-state-icon">🛒</div>
+                <p>Your cart history is empty. Start shopping today!</p>
+            </div>
         @endif
+    </div>
 
-        <div class="profile-section-title">Booking History</div>
-        <p class="text-muted">Your booked tables are shown below. Log in to view all your reservations.</p>
+    <!-- Booking History -->
+    <div class="profile-content">
+        <div class="section-title">🍽️ Table Bookings</div>
         @if($bookings->count())
-            <ul class="profile-list">
-                @foreach($bookings as $booking)
-                    <li>
-                        <div>
-                            <strong>Booking #{{ $booking->id }}</strong><br>
-                            <span class="text-muted">Date: {{ $booking->date }} | Time: {{ $booking->time }}</span>
-                        </div>
-                        <div>
-                            <span class="profile-badge">Guests: {{ $booking->guest }}</span>
-                            <span class="profile-badge">Phone: {{ $booking->phone }}</span>
-                            <a href="{{ url('cancel_booking', $booking->id) }}" class="btn btn-danger" style="margin-left: 0.5rem;">Cancel</a>
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
+            @foreach($bookings as $booking)
+                <div class="history-item">
+                    <div class="history-info">
+                        <div class="history-title">Booking #{{ $booking->id }}</div>
+                        <div class="history-date">📅 {{ $booking->date }} at {{ $booking->time }} • 👥 {{ $booking->guest }} guests</div>
+                    </div>
+                    <div class="actions-row">
+                        <span class="status-badge">📞 {{ $booking->phone }}</span>
+                        <a href="{{ url('cancel_booking', $booking->id) }}" class="btn btn-danger">Cancel</a>
+                    </div>
+                </div>
+            @endforeach
         @else
-            <p class="text-muted">No table bookings found.</p>
+            <div class="empty-state">
+                <div class="empty-state-icon">📅</div>
+                <p>No table bookings yet. Reserve a table for your next visit!</p>
+            </div>
         @endif
     </div>
 </div>
+
 @endsection

@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    function users()
+    {
+        $data = User::where('usertype', '=', 'user')->get();
+        $total_user = User::where('usertype', '=', 'user')->count();
+        $total_food = Food::count();
+        $total_order = Order::count();
+        $total_deliverd = Order::where('delivery_status', '=', 'delivered')->count();
+        return view('admin.users', compact('data', 'total_user', 'total_food', 'total_order', 'total_deliverd'));
+    }
+
     function add_food()
     {
         return view('admin.add_food');
@@ -52,7 +62,11 @@ class AdminController extends Controller
     function view_food()
     {
         $data = Food::all();
-        return view('admin.view_food', compact('data'));
+        $total_user = User::where('usertype', '=', 'user')->count();
+        $total_food = Food::count();
+        $total_order = Order::count();
+        $total_deliverd = Order::where('delivery_status', '=', 'delivered')->count();
+        return view('admin.view_food', compact('data', 'total_user', 'total_food', 'total_order', 'total_deliverd'));
     }
 
     function delete_food($id)
@@ -82,7 +96,21 @@ class AdminController extends Controller
     function orders()
     {
         $data = Order::all();
-        return view('admin.order', compact('data'));
+        $total_user = User::where('usertype', '=', 'user')->count();
+        $total_food = Food::count();
+        $total_order = Order::count();
+        $total_deliverd = Order::where('delivery_status', '=', 'delivered')->count();
+        return view('admin.order', compact('data', 'total_user', 'total_food', 'total_order', 'total_deliverd'));
+    }
+
+    function delivered_orders()
+    {
+        $data = Order::where('delivery_status', '=', 'delivered')->get();
+        $total_user = User::where('usertype', '=', 'user')->count();
+        $total_food = Food::count();
+        $total_order = Order::count();
+        $total_deliverd = Order::where('delivery_status', '=', 'delivered')->count();
+        return view('admin.delivered_orders', compact('data', 'total_user', 'total_food', 'total_order', 'total_deliverd'));
     }
     
     function on_the_way($id)

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
@@ -21,6 +23,8 @@ Route::get('logout',[AdminController::class,'logout'])->name('logout');
 
 Route::get('/add_food',[AdminController::class,'add_food'])->name('add_food');
 
+Route::get('/users',[AdminController::class,'users'])->name('users');
+
 Route::get('/view_food',[AdminController::class,'view_food']) ->name('view_food');
 
 Route::post('/upload_food',[AdminController::class,'upload_food'])->name('upload_food');
@@ -30,6 +34,20 @@ Route::get('/update_food/{id}',[AdminController::class,'update_food'])->name('up
 Route::get('/delete_food/{id}',[AdminController::class,'delete_food'])->name('delete_food');
 
 Route::post('/edit_food/{id}',[AdminController::class,'edit_food'])->name('edit_food');
+
+Route::get('/orders', [AdminController::class,'orders'])->name('orders');
+
+Route::get('/delivered_orders', [AdminController::class,'delivered_orders'])->name('delivered_orders');
+
+Route::get('/on_the_way/{id}', [AdminController::class,'on_the_way'])->name('on_the_way');
+
+Route::get('/delivered/{id}', [AdminController::class,'delivered'])->name('delivered');
+
+Route::get('/canceled/{id}', [AdminController::class,'canceled'])->name('canceled');
+
+Route::get('/reservations', [AdminController::class,'reservations'])->name('reservations');
+
+Route::get('/cancel_reservation/{id}', [AdminController::class,'cancel_reservation'])->name('cancel_reservation');
 
 Route::get('/home', [HomeController::class,'index'])->name('home');   
 
@@ -47,25 +65,28 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('user.profile.update');
 });
 
-Route::get('/orders', [AdminController::class,'orders'])->name('orders');
-
-Route::get('/on_the_way/{id}', [AdminController::class,'on_the_way'])->name('on_the_way');
-
-Route::get('/delivered/{id}', [AdminController::class,'delivered'])->name('delivered');
-
-Route::get('/canceled/{id}', [AdminController::class,'canceled'])->name('canceled');
-
-Route::get('/reservations', [AdminController::class,'reservations'])->name('reservations');
-Route::get('/cancel_reservation/{id}', [AdminController::class,'cancel_reservation'])->name('cancel_reservation');
-
-Route::get('/home', [HomeController::class,'index'])->name('home');
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $user = Auth::user();
+
+        $dashboardStats = [
+            'totalOrders' => $user->orders()->count(),
+            'pendingOrders' => $user->orders()->where('delivery_status', 'pending')->count(),
+            'deliveredOrders' => $user->orders()->where('delivery_status', 'delivered')->count(),
+            'cartItems' => $user->carts()->count(),
+            'bookings' => $user->bookings()->count(),
+            'totalSpent' => $user->orders()->select(DB::raw('COALESCE(SUM(price * quantity), 0) as total'))->value('total'),
+        ];
+
+        $recentOrders = $user->orders()
+            ->latest()
+            ->take(3)
+            ->get();
+
+        return view('dashboard', compact('user', 'dashboardStats', 'recentOrders'));
     })->name('dashboard');
 });
