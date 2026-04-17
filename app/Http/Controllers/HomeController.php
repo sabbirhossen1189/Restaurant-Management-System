@@ -16,27 +16,26 @@ class HomeController extends Controller
 {
     public function index()
     {
-        if (Auth::id())
-        {
-            $usertype = Auth::user()->usertype;
-
-            if ($usertype == 'user')
-            {
-                $data = Food::all(); 
-                return view('home.index', compact('data'));
-            }
-            else
-            {
-                $total_user = User::where('usertype', '=', 'user')->count();
-                $total_food = Food::count();
-                $total_order = Order::count();
-                $total_deliverd = Order::where('delivery_status', '=', 'delivered')->count();
-                
-                return view('admin.index', compact('total_user', 'total_food', 'total_order', 'total_deliverd'));
-               
-            }
+        if (!Auth::check()) {
+            return redirect()->route('login');
         }
-    
+
+        $usertype = Auth::user()->usertype;
+
+        if ($usertype == 'user')
+        {
+            $data = Food::all();
+            return view('home.index', compact('data'));
+        }
+        else
+        {
+            $total_user = User::where('usertype', '=', 'user')->count();
+            $total_food = Food::count();
+            $total_order = Order::count();
+            $total_deliverd = Order::where('delivery_status', '=', 'delivered')->count();
+
+            return view('admin.index', compact('total_user', 'total_food', 'total_order', 'total_deliverd'));
+        }
     }
 
     public function Home()

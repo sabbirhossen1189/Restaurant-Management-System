@@ -17,37 +17,37 @@ use App\Http\Controllers\ProfileController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',[HomeController::class,'Home'])->name('home');
+Route::get('/',[HomeController::class,'Home'])->name('welcome');
 
-Route::get('logout',[AdminController::class,'logout'])->name('logout');
+Route::middleware(['auth','admin'])->group(function () {
+    Route::get('/add_food',[AdminController::class,'add_food'])->name('add_food');
 
-Route::get('/add_food',[AdminController::class,'add_food'])->name('add_food');
+    Route::get('/users',[AdminController::class,'users'])->name('users');
 
-Route::get('/users',[AdminController::class,'users'])->name('users');
+    Route::get('/view_food',[AdminController::class,'view_food']) ->name('view_food');
 
-Route::get('/view_food',[AdminController::class,'view_food']) ->name('view_food');
+    Route::post('/upload_food',[AdminController::class,'upload_food'])->name('upload_food');
 
-Route::post('/upload_food',[AdminController::class,'upload_food'])->name('upload_food');
+    Route::get('/update_food/{id}',[AdminController::class,'update_food'])->name('update_food');
 
-Route::get('/update_food/{id}',[AdminController::class,'update_food'])->name('update_food');
+    Route::get('/delete_food/{id}',[AdminController::class,'delete_food'])->name('delete_food');
 
-Route::get('/delete_food/{id}',[AdminController::class,'delete_food'])->name('delete_food');
+    Route::post('/edit_food/{id}',[AdminController::class,'edit_food'])->name('edit_food');
 
-Route::post('/edit_food/{id}',[AdminController::class,'edit_food'])->name('edit_food');
+    Route::get('/orders', [AdminController::class,'orders'])->name('orders');
 
-Route::get('/orders', [AdminController::class,'orders'])->name('orders');
+    Route::get('/delivered_orders', [AdminController::class,'delivered_orders'])->name('delivered_orders');
 
-Route::get('/delivered_orders', [AdminController::class,'delivered_orders'])->name('delivered_orders');
+    Route::get('/on_the_way/{id}', [AdminController::class,'on_the_way'])->name('on_the_way');
 
-Route::get('/on_the_way/{id}', [AdminController::class,'on_the_way'])->name('on_the_way');
+    Route::get('/delivered/{id}', [AdminController::class,'delivered'])->name('delivered');
 
-Route::get('/delivered/{id}', [AdminController::class,'delivered'])->name('delivered');
+    Route::get('/canceled/{id}', [AdminController::class,'canceled'])->name('canceled');
 
-Route::get('/canceled/{id}', [AdminController::class,'canceled'])->name('canceled');
+    Route::get('/reservations', [AdminController::class,'reservations'])->name('reservations');
 
-Route::get('/reservations', [AdminController::class,'reservations'])->name('reservations');
-
-Route::get('/cancel_reservation/{id}', [AdminController::class,'cancel_reservation'])->name('cancel_reservation');
+    Route::get('/cancel_reservation/{id}', [AdminController::class,'cancel_reservation'])->name('cancel_reservation');
+});
 
 Route::get('/home', [HomeController::class,'index'])->name('home');   
 
